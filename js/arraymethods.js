@@ -17,6 +17,7 @@ let nama = ["eren", "reiner", "bertholdt", "anie"]
 
 let mapel = ["ipa", "bahasa", "matematika"]
 // console.log(nama.concat(mapel));
+let angka =[3,2,1]
 
 let halo = nama.concat(['ips', 'pkn', 'sejarah']);
 
@@ -43,6 +44,23 @@ let halo = nama.concat(['ips', 'pkn', 'sejarah']);
 //         console.log(item.ipa, item.nama);
 //     }
 // })
-nilai.filter((item)=>(item.ipa > 80 && item.matematika > 80? console.log(item.nama,item.ipa): null));
+// nilai.filter((item)=>(item.ipa > 80 && item.matematika > 80? console.log(item.nama,item.ipa): null));
 
-console.log(nilai);
+// console.log(nilai);
+
+// let siswa = nilai.map(function (a) {
+//     return a.nama
+// })
+
+// let siswa = nilai.map((a)=>[a.nama, a.ipa, a.bahasa])
+// console.log(siswa);
+
+// mapel.sort()
+// console.log(mapel);
+
+// let hasil = nilai.reduce(function (a,b) {
+//     return (a=a+b.ipa);
+// }, 0)
+
+let hasil = nilai.reduce((a,b)=> (a+=b.ipa), 0)
+console.log(hasil);

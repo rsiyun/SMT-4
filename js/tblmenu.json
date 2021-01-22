@@ -1,0 +1,28 @@
+[{
+    "idmenu":1,
+    "idkategori":1,
+    "menu":"nasi goreng",
+    "bumbu": ["bawang putih", "bawang merah", "saos"],
+    "harga": 10000,
+    "stok": true,
+    "keterangan": null
+},
+{
+    "idmenu":2,
+    "idkategori":1,
+    "menu":"nasi bakar",
+    "harga": 7000,
+    "bumbu": ["bawang putih", "bawang merah", "kemangi"],
+    "stok": true,
+    "keterangan": null
+},
+{
+    "idmenu":2,
+    "idkategori":1,
+    "menu":"nasiku",
+    "harga": 7000,
+    "bumbu": ["bawang putih", "bawang merah", "kemangi"],
+    "stok": true,
+    "keterangan": null
+}
+]
