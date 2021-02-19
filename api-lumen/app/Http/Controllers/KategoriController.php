@@ -25,10 +25,16 @@ class KategoriController extends Controller
      */
     public function create(Request $request)
     {
+        //required => harus diisi
+        //unique => tidak boleh sama unique:table mana
+        //max => maksimal karakter atau huruf
+        $this->validate($request, [
+            'kategori' => 'required|unique:kategoris',
+            'keterangan' => 'required'
+        ]);
 
-        Kategori::create($request->all());
-        //
-        return response()->json('data sudah dimasukan');
+        $kategori = Kategori::create($request->all());
+        return response()->json($kategori);
     }
 
     /**
@@ -76,7 +82,8 @@ class KategoriController extends Controller
     public function update(Request $request, $id)
     {
         //
-        return response()->json("Ini Update");
+        Kategori::where('idkategori', $id)->update($request->all());
+        return response()->json("data sudah terupdate");
     }
 
     /**
