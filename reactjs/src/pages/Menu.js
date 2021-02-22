@@ -13,7 +13,7 @@ function Menu() {
         },
         {
             idmenu:2,
-            idkategori:2,
+            idkategori:1,
             menu:"Melon",
             gambar:"Melon.jpg",
             harga:12000
@@ -44,6 +44,7 @@ function Menu() {
     return(
         <div className="App">
             <Table menu={menu} title={title}/>
+            <Table menu={menu.filter((data)=>(data.idkategori===1))} title="Buah"/>
         </div>
     )
 }

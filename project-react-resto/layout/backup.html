@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project-Restoran</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row mt-4">
+            <div>
+                <h1 class="display-4">Belajar Axios</h1>
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary" id="get">GET</button>
+                <button type="button" class="btn btn-info" id="show">SHOW</button>
+                <button type="button" class="btn btn-warning" id="update">UPDATE</button>
+                <button type="button" class="btn btn-success" id="post">POST</button>
+                <button type="button" class="btn btn-danger" id="del">DELETE</button>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div id="out">
+
+            </div>
+        </div>
+    </div>
+    <script>
+        const url = 'http://localhost:8000/api';
+        const api_token = 'oDcsCacv72Td0WRa3MfaBOS3tC9yytgXOjX0AryA'
+        // axios({
+        //     method: 'get',
+        //     url: url,
+        //     headers:{
+        //         'api_token': api_token
+        //     }
+        // }).then(res => console.log(res.data[0]));
+        const link = axios.create({
+            baseURL:url,
+            headers:{
+                'api_token': api_token
+            }
+        })
+
+        // coba.innerHTML=res.data[0]['pelanggan']
+        var ids = document.getElementById('out')
+        function get() { 
+            link.get('/pelanggan').then(res=>{
+                console.log(res.data);
+                let tampil = `<table class="table table-bordered">
+                    <tr>
+                        <th>Idpelanggan</th>
+                        <th>Pelanggan</th>
+                        <th>telp</th>
+                    </tr>
+                    `;
+                res.data.forEach(element => {
+                    tampil+= 
+                    `<tr>
+                        <td>${element.idpelanggan}</td>
+                        <td>${element.pelanggan}</td>
+                        <td>${element.telp}</td>
+                    </tr>`;
+                });
+                tampil+=`</table>`
+                ids.innerHTML=tampil
+            })
+        }
+        function show(){
+            let id = 99;
+            link.get(`/pelanggan/${id}`).then(res=>{
+                let tampil = `<table class="table table-bordered">
+                    <tr>
+                        <th>Idpelanggan</th>
+                        <th>Pelanggan</th>
+                        <th>Alamat</th>
+                        <th>Telp</th>
+                    </tr>
+                    `;
+                res.data.forEach(element => {
+                    tampil+= 
+                    `<tr>
+                        <td>${element.idpelanggan}</td>
+                        <td>${element.pelanggan}</td>
+                        <td>${element.alamat}</td>
+                        <td>${element.telp}</td>
+                    </tr>`;
+                });
+                tampil+=`</table>`
+                ids.innerHTML=tampil
+            })
+
+        }
+        function post(){
+            //menyiapkan data 
+            //upload menggunakan post
+            let data = {
+              pelanggan:'pelanggan Axios2',
+              alamat:'jl.axios',
+              telp:'4102'
+            }
+            link.post('/pelanggan',data).then(res=>{
+                alert(res.data.pesan)
+            });
+        }
+        function update(){
+            let id = 5;
+            let data = {
+               pelanggan: 'telahdirubah',
+               alamat:'jl.ubahpelanggan',
+               telp:'(974) 204-6869' 
+            }
+            link.put(`/pelanggan/${id}`,data).then(res=>{
+                alert(res.data.pesan)
+            })
+        }
+        function hapus(){
+            let id = 4;
+            link.delete(`/pelanggan/${id}`).then(res=>{
+                alert(res.data.pesan)
+            });
+        }
+        document.querySelector('#get').addEventListener('click',get)
+        document.querySelector('#show').addEventListener('click',show)
+        document.querySelector('#post').addEventListener('click',post)
+        document.querySelector('#del').addEventListener('click',hapus)
+        document.querySelector('#update').addEventListener('click',update)
+    </script>
+</body>
+</html>
