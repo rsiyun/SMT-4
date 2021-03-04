@@ -1,11 +1,11 @@
 import React from 'react';
 
-const nav = () => {
+const Footer = () => {
     return (
         <div>
-            <h1>Front</h1>
+            <h1>Footer</h1>
         </div>
     );
 }
 
-export default nav;
+export default Footer;

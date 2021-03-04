@@ -3,7 +3,7 @@ import React from 'react';
 const nav = () => {
     return (
         <div>
-            <h1>Front</h1>
+            <h1>admin</h1>
         </div>
     );
 }
