@@ -33,5 +33,11 @@ $router->group(['prefix' => 'api', 'middleware' => 'auth'], function () use ($ro
     $router->delete('pelanggan/{id}', ['uses' => 'PelangganController@destroy']);
 
     $router->get('menu', ['uses' => 'MenuController@index']);
+    $router->get('menu/{id}', ['uses' => 'MenuController@show']);
     $router->post('menu', ['uses' => 'MenuController@create']);
+    $router->post('menu/{id}', ['uses' => 'MenuController@update']);
+    $router->delete('menu/{id}', ['uses' => 'MenuController@destroy']);
+
+    $router->get('order', ['uses' => 'OrderController@index']);
+    $router->put('order/{id}', ['uses' => 'OrderController@update']);
 });

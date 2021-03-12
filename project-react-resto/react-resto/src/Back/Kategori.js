@@ -1,18 +1,19 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState } from 'react';
 import {link} from '../Axios/link'
 import {useForm} from 'react-hook-form';
+import useGet from '../Hook/useGet'
 
 const Kategori = () => {
-    const [State, setState] = useState([]);
     const {register,handleSubmit,reset,errors,setValue} = useForm();
     const [pesan,setPesan] = useState([]);
     const [idkategori,setIdkategori] = useState('');
     const [Pilihan,setPilihan] = useState(true);
-    async function fetchData() {
-        const result = await link.get('/kategori')
-        // console.log(result);
-        setState(result.data)
-    }
+    // async function fetchData() {
+    //     const result = await link.get('/kategori')
+    //     // console.log(result);
+    //     setState(result.data)
+    // }
+    const [State] = useGet('./kategori')
     function simpan(data) {
         console.log(data)
         if (Pilihan) {
@@ -37,10 +38,9 @@ const Kategori = () => {
         setIdkategori(res.data[0].idkategori)
         setPilihan(false);
     }
-    fetchData()
-    useEffect(() => {
-        fetchData()
-    },[State])
+    // useEffect(() => {
+    //     fetchData()
+    // },[State])
     let no = 1;
     return (
     <div>

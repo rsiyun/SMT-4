@@ -49,18 +49,10 @@ class MenuController extends Controller
             ];
             $menu = Menu::create($data);
             if ($menu) {
-                $result = [
-                    'pesan' => 'data sudah ditambahkan',
-                    'data' => $data
-                ];
-            } else {
-                $result = [
-                    'pesan' => 'data tidak bisa ditambahkan',
-                    'data' => ''
-                ];
+                return response()->json([
+                    'pesan' => 'Data Sudah ditambahkan'
+                ]);
             }
-            return response()->json($result, 200);
-            // your code here
         } else {
             return response()->json('gagal');
         }
@@ -83,9 +75,16 @@ class MenuController extends Controller
      * @param  \App\Models\Menu  $menu
      * @return \Illuminate\Http\Response
      */
-    public function show(Menu $menu)
+    public function show($id)
     {
         //
+        $data = DB::table('menus')
+            ->join('kategoris', 'kategoris.idkategori', '=', 'menus.idkategori')
+            ->select('menus.*', 'kategoris.kategori')
+            ->where('idmenu', '=', $id)
+            ->get();
+        //
+        return response()->json($data);
     }
 
     /**
@@ -106,9 +105,37 @@ class MenuController extends Controller
      * @param  \App\Models\Menu  $menu
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Menu $menu)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'idkategori' => 'required|numeric',
+            'menu' => 'required',
+            'harga' => 'required|numeric'
+        ]);
+        if ($request->hasFile('gambar')) {
+
+            $gambar = $request->file('gambar')->getClientOriginalName();
+            $request->file('gambar')->move('upload', $gambar);
+            $data = [
+                'idkategori' => $request->input('idkategori'),
+                'menu' => $request->input('menu'),
+                'gambar' => url('upload/' . $gambar),
+                'harga' => $request->input('harga')
+            ];
+        } else {
+            $data = [
+                'idkategori' => $request->input('idkategori'),
+                'menu' => $request->input('menu'),
+                'harga' => $request->input('harga')
+            ];
+        }
+        // return response()->json($data);
+        $menu = Menu::where('idmenu', $id)->update($data);
+        if ($menu) {
+            return response()->json([
+                'pesan' => 'Data Sudah diupdate'
+            ]);
+        }
     }
 
     /**
@@ -117,8 +144,13 @@ class MenuController extends Controller
      * @param  \App\Models\Menu  $menu
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Menu $menu)
+    public function destroy($id)
     {
-        //
+        $menu = Menu::where('idmenu', $id)->delete();
+        if ($menu) {
+            return response()->json([
+                'pesan' => 'Data Sudah dihapuskan'
+            ]);
+        }
     }
 }
