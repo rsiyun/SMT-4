@@ -53,8 +53,6 @@ class OrderController extends Controller
      */
     public function show($a, $b)
     {
-        //
-
         $data = DB::table('orders')
             ->join('pelanggans', 'pelanggans.idpelanggan', '=', 'orders.idpelanggan')
             ->select('orders.*', 'pelanggans.*')

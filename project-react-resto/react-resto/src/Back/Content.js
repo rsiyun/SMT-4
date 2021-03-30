@@ -4,6 +4,8 @@ import Kategori from './Kategori';
 import Menu from './Menu';
 import Pelanggan from './Pelanggan';
 import Order from './Order';
+import Detail from './Detail';
+import User from './User';
 const Content = () => {
     const {isi} = useParams();
     let tampil;
@@ -18,6 +20,12 @@ const Content = () => {
     }
     if (isi==='order') {
         tampil = <Order/>
+    }
+    if (isi==='detail') {
+        tampil = <Detail/>
+    }
+    if (isi==='admin-page') {
+        tampil = <User/>
     }
     // if (isi==='order') {
     //     console.log('Order')

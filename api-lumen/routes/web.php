@@ -40,5 +40,9 @@ $router->group(['prefix' => 'api', 'middleware' => 'auth'], function () use ($ro
 
     $router->get('order', ['uses' => 'OrderController@index']);
     $router->put('order/{id}', ['uses' => 'OrderController@update']);
-    $router->get('order/{a}/{b}', ['uses' => 'OrderController@show']);;
+    $router->get('order/{a}/{b}', ['uses' => 'OrderController@show']);
+    $router->get('detail/{a}/{b}', ['uses' => 'DetailController@show']);
+
+    $router->get('admin-page', ['uses' => 'LoginController@index']);
+    $router->put('admin-page/{id}', ['uses' => 'LoginController@update']);
 });
